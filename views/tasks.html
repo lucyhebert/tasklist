@@ -1,0 +1,45 @@
+doctype html
+html(lang="en")
+
+head
+	title Tasks
+	
+	style
+		include css/datepicker.css
+		include css/normalize.css
+		
+	script(src="https://code.jquery.com/jquery-1.12.4.js")
+	script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.js")
+	script
+		include ../datepicker.js
+	
+body
+
+	form(action='/tasks/new', method='POST')
+		h1 Nouvelle tâche
+		input(type="text", name="nom", placeholder="Nom")
+		input(type="text", name="date", placeholder="Date", id="datepicker")
+		input(type="text", name="labels", placeholder="Labels (séparés par des virgules)")
+		br
+		input(type="submit", value="Ajouter")
+
+	h1 Liste des tâches
+	
+	//form()
+	table
+		each task in tasklist 
+			tr
+				td
+					input(type="text" value=task.nom readonly)  
+				td
+					input(type="text" value=task.date readonly)  
+				td
+					input(type="text" value=task.labels readonly)  
+				td
+					input(type="hidden" name="id" value=task._id)  
+				td
+					form(method='GET', action="/tasks/"+task._id) 
+						input(type="submit", value="Afficher")
+				td
+					form(method='POST', action="/tasks/delete/"+task._id) 
+						input(type="submit", value="Supprimer")

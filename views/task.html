@@ -1,0 +1,18 @@
+doctype html
+html(lang="en")
+
+head
+	title Task
+	
+body
+	table
+		each task in tasklist 
+			tr
+				td
+					input(type="text" value=task.nom readonly)  
+				td
+					input(type="text" value=task.date readonly)  
+				td
+					input(type="text" value=task.labels readonly)  
+				td
+					input(type="hidden" name="id" value=task._id)  
